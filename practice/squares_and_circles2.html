@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>React.js Squares and Circles</title>
+    <script src="../react.js"></script>
+    <script src="../react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.24/browser.min.js"></script>
+  </head>
+  <body>
+  <div id='container'></div>
+
+    <script type="text/babel">
+      var Circle = React.createClass({
+        render: function(){
+          var styles = {height: '50px', width: '50px',
+          borderRadius: '50px', backgroundColor: this.props.color, float: 'left'};
+          return <div style={styles}></div>
+        }
+      });
+
+      var Container = React.createClass({
+        circles: function(){
+          return this.props.circles.map(function(color, index){
+            return <Circle color={color} key={index} />;
+          });
+        },
+        render: function(){
+          return <div style={this.props.style}>
+            {this.circles()}
+          </div>
+        }
+      });
+
+      var style1 = {width: '200px', height: '200px', backgroundColor: 'red'}
+      ReactDOM.render(< Container style={style1} circles={['green','yellow','orange']} />, document.getElementById('container'));
+    </script>
+  </body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>React.js Squares and Circles</title>
+    <script src="../react.js"></script>
+    <script src="../react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.24/browser.min.js"></script>
+  </head>
+  <body>
+  <div id='container'></div>
+  <div id='container-2'></div>
+    <script type="text/babel">
+      var Circle = React.createClass({
+        render: function(){
+          var styles = {height: '50px', width: '50px', borderRadius: '50px',
+          backgroundColor: this.props.color, float: 'left'};
+          return <div style={styles}></div>;
+        }
+      });
+
+      var BgShape = React.createClass({
+        circles: function(){
+          return this.props.circleColors.map(function(color, index){
+            return <Circle color={color} key={index} />;
+          });
+        },
+        render: function(){
+          return <div style={this.props.style}>
+                  {this.circles()}
+                 </div>
+        }
+      });
+      var style1 = {height: '200px', width: '200px', backgroundColor: 'red'}
+      var style2 = {height: '300px', width: '400px', backgroundColor: 'brown'}
+      ReactDOM.render(<BgShape style={style1} circleColors={['blue', 'pink']}/>, document.getElementById('container'));
+      ReactDOM.render(<BgShape style={style2} circleColors={['blue', 'green', 'orange', 'purple']}/>, document.getElementById('container-2'));
+    </script>
+  </body>
+</html>
