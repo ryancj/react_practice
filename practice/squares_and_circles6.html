@@ -9,20 +9,22 @@
   </head>
   <body>
   <div id='container'></div>
+  <div id='container-2'></div>
 
     <script type="text/babel">
       var Circle = React.createClass({
         render: function(){
           var styles = {height: '50px', width: '50px',
-          backgroundColor: this.props.color, borderRadius: '50px', float: 'left'}
+          borderRadius: '50px', float:'left',
+          backgroundColor: this.props.color}
           return <div style={styles}></div>
         }
-      });
+      })
 
-      var Square = React.createClass({
+      var Container = React.createClass({
         circles: function(){
           return this.props.circles.map(function(color, index){
-            return <Circle color={color} key={index} />;
+            return < Circle color={color} key={index} />
           });
         },
         render: function(){
@@ -32,10 +34,13 @@
         }
       });
 
-      var style1 = {width: '200px', height: '200px', backgroundColor: 'red'}
+      var style1 = {width: '200px', height: '200px', backgroundColor: 'pink'}
+      var style2 = {width: '400px', height: '300px', backgroundColor: 'black'}
 
-      ReactDOM.render(<Square style={style1} circles={['black','pink','purple']}/>,
-     document.getElementById('container'));
+      ReactDOM.render(< Container style={style1} circles={['green','purple','yellow']}/>,
+      document.getElementById('container'))
+      ReactDOM.render(< Container style={style2} circles={['red','orange','yellow','gold','salmon']}/>,
+      document.getElementById('container-2'))
     </script>
   </body>
 </html>

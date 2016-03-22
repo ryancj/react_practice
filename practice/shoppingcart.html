@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>React.js Hello World</title>
+    <script src="../react.js"></script>
+    <script src="../react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.24/browser.min.js"></script>
+  </head>
+  <body>
+    <div id='container'></div>
+    <script type="text/babel">
+    var Product = React.createClass({
+      getInitialState: function() {
+        return {color: "white", clicked: false};
+      },
+      handleClick: function(){
+        if(this.state.clicked === false) {
+          this.props.calculateTotal(this.props.price);
+          this.setState({color: "grey", clicked: true});
+        } else {
+          this.props.calculateTotal(-this.props.price);
+          this.setState({color: "white", clicked: false});
+        }
+      },
+      render: function(){
+        var styles = {
+          width:"50px",
+          backgroundColor: this.state.color,
+          border: "1px solid black"
+        };
+        return <tr><td style={styles} onClick={this.handleClick}>{this.props.name} (${this.props.price})</td></tr>;
+      }
+    });
+    var ProductList = React.createClass({
+      getInitialState: function() {
+        return { total: 0 };
+      },
+      calculateTotal: function(price){
+        this.setState({total: this.state.total + price });
+      },
+      products: function() {
+        return this.props.products.map(function(product, index){
+          return <Product name={product.name} price={product.price} key={index} calculateTotal={this.calculateTotal} />;
+        }.bind(this));
+      },
+      render: function(){
+        var styles = {
+          width: "200px",
+          padding: "5px",
+          border: "1px solid black"
+        }
+        return <div><table style={styles}><tbody>{this.products()}</tbody></table>Total: ${this.state.total}</div>;
+      }
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+  </body>
+</html>
